@@ -7,7 +7,6 @@ public class LifeSpawned : MonoBehaviour {
 	
 	// Use this for initialization
 	void Start () {
-		Debug.Log("TOTO");
 	}
 	
 	// Update is called once per frame

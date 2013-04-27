@@ -3,10 +3,10 @@ using System.Collections;
 
 public class SpawnerCube : MonoBehaviour {
 
-	public int x = 0;
 	public int y = 0;
-	public int width = 150;
+	public Vector2 limit_x = new Vector2(0,0);
 	public GameObject newObj;
+	public float timer = 1;
 	
 	private float prev_time = 0;
 	
@@ -17,10 +17,15 @@ public class SpawnerCube : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 		float now = Time.time;
-		if ((int)prev_time < (int)now)
+		
+		if (now - prev_time > timer)
 		{
-			Instantiate(newObj);
+			Vector3 scenePos = this.gameObject.transform.position;
+			float x = Random.Range(limit_x.x, limit_x.y);
+			Vector3 pos = new Vector3(x,scenePos.y + y,scenePos.z);
+			
+			Instantiate(newObj, pos, Quaternion.identity);
+			prev_time = now;
 		}
-		prev_time = now;
 	}
 }
