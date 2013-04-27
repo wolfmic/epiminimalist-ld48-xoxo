@@ -23,7 +23,7 @@ public class SpawnerCube : MonoBehaviour {
 			Vector3 scenePos = this.gameObject.transform.position;
 			float x = Random.Range(limit_x.x, limit_x.y);
 			Vector3 pos = new Vector3(x,scenePos.y + y,scenePos.z);
-			
+
 			Instantiate(newObj, pos, Quaternion.identity);
 			prev_time = now;
 		}
