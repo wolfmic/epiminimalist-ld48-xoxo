@@ -103,6 +103,19 @@ public class deleteCube : MonoBehaviour {
 					StartCoroutine(fireSpotlightGreen(clickedObj));
 					Destroy(clickedObj);
 				}
+				else if (clickedObj.tag == "LifeBonus") {
+					StartCoroutine(fireSpotlightGreen(clickedObj));
+					Destroy(clickedObj);
+				}
+				else if (clickedObj.tag == "DieBonus") {
+					StartCoroutine(fireSpotlightRed(clickedObj));
+					Destroy(clickedObj);
+				}
+				else if (clickedObj.tag == "PopBonus") {
+					StartCoroutine(fireSpotlightGreen(clickedObj));
+					Destroy(clickedObj);
+				}
+
 				else {
 					sb.UpdateScore(-1);
 					StartCoroutine(fireSpotlightRed());
