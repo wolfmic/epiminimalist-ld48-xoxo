@@ -28,8 +28,8 @@ public class SpawnerCube : MonoBehaviour {
 		} else if (newObj.tag == "LifeBonus") {
 			my_timer = Random.Range(30, 50);	
 		} else if (newObj.tag == "DestroyBonus") {
-			my_timer = Random.Range (25, 50);
-		}else {
+			my_timer = Random.Range(25, 50);
+		} else {
 			my_timer = timer;
 		}
 		return (my_timer);

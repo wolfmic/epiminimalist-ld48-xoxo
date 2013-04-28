@@ -7,9 +7,13 @@ public class LifeSpawned : MonoBehaviour {
 	private float timeout = 0;
 	private bool timeActivatedJump = false;
 	private bool timeActivatedDestroy = false;
-			
+	private GameObject myCamera;
+	private scoreBox sb;
+	
 	// Use this for initialization
 	void Start () {
+		myCamera = GameObject.FindGameObjectWithTag("MainCamera");
+		sb = (scoreBox)myCamera.GetComponent("scoreBox");
 	}
 	
 	public void timeOutJump (float t) {
@@ -26,6 +30,10 @@ public class LifeSpawned : MonoBehaviour {
 	void Update () {
 		if (this.transform.position.y <= limit_y)
 		{
+			if (this.gameObject.tag == "ObligedBonus")
+			{
+				sb.UpdateLife(-1);
+			}
 			Destroy(this.gameObject);
 		}
 		timeout -= Time.deltaTime;

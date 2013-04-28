@@ -121,7 +121,10 @@ public class deleteCube : MonoBehaviour {
 					StartCoroutine(fireSpotlightGreen(clickedObj));
 					Destroy(clickedObj);
 				}
-
+				else if (clickedObj.tag == "ObligedBonus") {
+					StartCoroutine(fireSpotlightGreen(clickedObj));
+					Destroy(clickedObj);
+				}
 				else {
 					sb.UpdateScore(-1);
 					StartCoroutine(fireSpotlightRed());
