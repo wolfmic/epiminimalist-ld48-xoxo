@@ -108,7 +108,7 @@ public class deleteCube : MonoBehaviour {
 					Destroy(clickedObj);
 				}
 				else if (clickedObj.tag == "DieBonus") {
-					StartCoroutine(fireSpotlightRed(clickedObj));
+					StartCoroutine(fireSpotlightRed());
 					Destroy(clickedObj);
 				}
 				else if (clickedObj.tag == "PopBonus") {
