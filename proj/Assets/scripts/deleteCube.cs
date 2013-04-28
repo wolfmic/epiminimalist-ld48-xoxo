@@ -7,14 +7,15 @@ public class deleteCube : MonoBehaviour {
 	public float timeoutJmp = 2;
 	public GameObject greenSpot;
 	public GameObject redSpot;
+	private scoreBox sb;
 	int incR = 0;
 	int incG = 0;
 	
 	// Use this for initialization
 	void Start () {
 		myCamera = GameObject.FindGameObjectWithTag("MainCamera");
-		
-		Vector3 pos = Camera.main.transform.position;
+		sb = (scoreBox)myCamera.GetComponent("scoreBox");
+
 		greenSpot.SetActive(false);
 		redSpot.SetActive(false);
 	}
@@ -47,7 +48,6 @@ public class deleteCube : MonoBehaviour {
 	{
 		redSpot.SetActive(true);
 		Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-		Vector3 target = camera.ViewportToWorldPoint(Input.mousePosition);
 		redSpot.transform.LookAt(ray.GetPoint(1));
 		incR++;
 		yield return new WaitForSeconds(0.3f);
@@ -61,18 +61,15 @@ public class deleteCube : MonoBehaviour {
 		GameObject clickedObj = null;
 		if (Input.GetMouseButtonDown(0)) {
 			clickedObj = GetClickedGameObject();
-			scoreBox sb = (scoreBox)myCamera.GetComponent("scoreBox");
-
-			Ray	ray = Camera.main.ScreenPointToRay(Input.mousePosition);
 
 			if (clickedObj != null) {
 				GameObject[] ObjList = GameObject.FindGameObjectsWithTag("Destroyable");
-				if (clickedObj.tag == "Destroyable") {
+				if (clickedObj.tag == "Destroyable") { // BASIC CUBE
 					Destroy(clickedObj);
 					sb.UpdateScore(2);
 					StartCoroutine(fireSpotlightGreen(clickedObj));
 				}
-				else if (clickedObj.tag == "JumpBonus") {
+				else if (clickedObj.tag == "JumpBonus") { // JUMP CUBE
 					foreach(GameObject Obj in ObjList) {
 						Obj.rigidbody.velocity = new Vector3(0, 10, 0);
 						Obj.GetComponent<LifeSpawned>().timeOutJump(timeoutJmp);
@@ -81,7 +78,7 @@ public class deleteCube : MonoBehaviour {
 					StartCoroutine(fireSpotlightGreen(clickedObj));
 					Destroy(clickedObj);
 				}
-				else if (clickedObj.tag == "FreezeBonus") {
+				else if (clickedObj.tag == "FreezeBonus") { // FREEZE CUBE
 					foreach(GameObject Obj in ObjList) {
 						Obj.rigidbody.drag = 200;
 						Obj.GetComponent<LifeSpawned>().timeOutJump(2);
@@ -89,26 +86,35 @@ public class deleteCube : MonoBehaviour {
 					StartCoroutine(fireSpotlightGreen(clickedObj));
 					Destroy(clickedObj);
 				}
-				else if (clickedObj.tag == "AccelBonus") {
+				else if (clickedObj.tag == "AccelBonus") { // ACCELERATOR CUBE
 					foreach(GameObject Obj in ObjList) {
 						Obj.rigidbody.velocity = new Vector3(0, -20, 0);
 					}
 					StartCoroutine(fireSpotlightGreen(clickedObj));
 					Destroy(clickedObj);
 				}
-				else if (clickedObj.tag == "DestroyBonus") {
+				else if (clickedObj.tag == "DestroyBonus") { // DETROYER CUBE
+					int j = 0;
 					foreach(GameObject Obj in ObjList) {
 						Obj.GetComponent<LifeSpawned>().timeOutDestroy(0);
+						j++;
 					}
+					sb.UpdateScore(10);
 					StartCoroutine(fireSpotlightGreen(clickedObj));
 					Destroy(clickedObj);
 				}
-				else if (clickedObj.tag == "LifeBonus") {
+				else if (clickedObj.tag == "LifeBonus") { // +1 LIFE CUBE
 					StartCoroutine(fireSpotlightGreen(clickedObj));
 					Destroy(clickedObj);
+					sb.UpdateLife(1);
 				}
-				else if (clickedObj.tag == "DieBonus") {
-					StartCoroutine(fireSpotlightRed(clickedObj));
+				else if (clickedObj.tag == "DieBonus") { // -1 LIFE CUBE
+					StartCoroutine(fireSpotlightRed());
+					Destroy(clickedObj);
+					sb.UpdateLife(-1);
+				}
+				else if (clickedObj.tag == "PopBonus") {
+					StartCoroutine(fireSpotlightGreen(clickedObj));
 					Destroy(clickedObj);
 				}
 				else if (clickedObj.tag == "PopBonus") {
