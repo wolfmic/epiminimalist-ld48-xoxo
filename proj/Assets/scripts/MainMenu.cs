@@ -6,8 +6,10 @@ public class MainMenu : MonoBehaviour {
 	public GUISkin newGame; 
 	public GUISkin quitGame;
 	public GUISkin credit;
+	public GUISkin title;
 	public Texture _newGameText;
 	public Texture _quitGameText;
+	public Texture _title;
 	
 	// Use this for initialization
 	void Start () {
@@ -24,6 +26,10 @@ public class MainMenu : MonoBehaviour {
 	
 	void OnGUI()
 	{
+		GUI.skin = title;
+		Rect RectTitle = new Rect(Screen.width / 2 -_title.width / 2.5f, Screen.height / 2 - _title.height, _title.width + 50, _title.height + 50);
+		GUI.Box(RectTitle, "");
+		
 		GUI.skin = newGame;
 		Rect RectNewGame = new Rect(Screen.width / 2 - _newGameText.width / 2, Screen.height / 2 - _newGameText.height / 2, _newGameText.width, _newGameText.height);
 		if (GUI.Button(RectNewGame, ""))
@@ -38,6 +44,5 @@ public class MainMenu : MonoBehaviour {
 		Rect RectCreditGame = new Rect(Screen.width / 2 - _newGameText.width / 2, Screen.height / 2 + _quitGameText.height - _quitGameText.height / 4, _newGameText.width, _quitGameText.height);
 		if (GUI.Button(RectCreditGame, ""))
 			Application.LoadLevel(1);
-		
 	}
 }
