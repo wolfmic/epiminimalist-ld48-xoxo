@@ -1,0 +1,10 @@
+fileFormatVersion: 2
+guid: 8ed07603a30adf94ebec89f413b1f2d1
+MonoImporter:
+  serializedVersion: 2
+  defaultReferences:
+  - newGame: {fileID: 11400000, guid: bd5531ce6ae1a824a914e673e1a62c20, type: 2}
+  - _newGameText: {fileID: 2800000, guid: 08f9a9bd8b1b30d41ab87945542e0716, type: 3}
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
