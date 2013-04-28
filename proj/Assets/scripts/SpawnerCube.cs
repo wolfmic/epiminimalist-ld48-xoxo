@@ -9,37 +9,39 @@ public class SpawnerCube : MonoBehaviour {
 	private GameObject myCamera;
 	private scoreBox sb;
 	private float prev_time = 0;
+	float my_timer;
 	
 	// Use this for initialization
 	void Start () {
 		myCamera = GameObject.FindGameObjectWithTag("MainCamera");
 		sb = (scoreBox)myCamera.GetComponent("scoreBox");
+		my_timer = timer;
+	}
+	
+	float changeTimer(string tag) {
+		if (newObj.tag == "Destroyable") { // Increment timer for simple cube
+			my_timer = timer - (float)(sb.getScore() / 50f) / 10f;
+			if (my_timer < 0.1)
+				my_timer = 0.1f;
+		} else if (newObj.tag == "DieBonus") {
+			my_timer = Random.Range(10, 15);
+		} else if (newObj.tag == "LifeBonus") {
+			my_timer = Random.Range(30, 50);	
+		} else if (newObj.tag == "DestroyBonus") {
+			my_timer = Random.Range (25, 50);
+		}else {
+			my_timer = timer;
+		}
+		return (my_timer);
 	}
 	
 	// Update is called once per frame
 	void Update () {
 		float now = Time.time;
-		float my_timer = timer;
 		
 		if (now - prev_time > my_timer)
 		{
-			if (newObj.tag == "Destroyable") { // Increment timer for simple cube
-				my_timer = timer - (float)(sb.getScore() / 50) / 10f;
-				if (my_timer < 0.1)
-					my_timer = 0.1f;
-			}
-			else if (newObj.tag == "DieBonus") {
-				my_timer = Random.Range(10, 15);
-			}
-			else if (newObj.tag == "LifeBonus") {
-				my_timer = Random.Range(25, 30);	
-			}
-			else if (newObj.tag == "DestroyBonus") {
-				my_timer = Random.Range (25, 50);
-			}
-			else {
-				my_timer = timer;
-			}
+			my_timer = changeTimer(newObj.tag);
 			Vector3 scenePos = this.gameObject.transform.position;
 			float x = Random.Range(limit_x.x, limit_x.y);
 			Vector3 pos = new Vector3(x,scenePos.y + y,scenePos.z);
