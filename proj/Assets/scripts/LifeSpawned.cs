@@ -30,7 +30,7 @@ public class LifeSpawned : MonoBehaviour {
 	void Update () {
 		if (this.transform.position.y <= limit_y)
 		{
-			if (this.gameObject.tag == "Destroyable")
+			if (this.gameObject.tag == "Destroyable" && Application.loadedLevel == 2)
 				sb.deleteCube();
 			else if (this.gameObject.tag == "ObligedBonus")
 				sb.UpdateLife(-1);
