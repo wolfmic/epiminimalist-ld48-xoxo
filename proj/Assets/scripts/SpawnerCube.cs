@@ -26,14 +26,13 @@ public class SpawnerCube : MonoBehaviour {
 		} else if (newObj.tag == "DieBonus") {
 			my_timer = Random.Range(10, 15);
 		} else if (newObj.tag == "LifeBonus") {
-			my_timer = Random.Range(30, 50);	
+			my_timer = Random.Range(20, 50);	
 		} else if (newObj.tag == "DestroyBonus") {
 			my_timer = Random.Range(25, 50);
 		} else if (newObj.tag == "ObligedBonus") {
 			my_timer = Random.Range(5, 10);
 		} else if (newObj.tag == "FreezeBonus") {
 			my_timer = Random.Range(7, 12);
-			Debug.Log ("Timer obliged : "+my_timer);
 		} else {
 			my_timer = timer;
 		}

@@ -10,7 +10,6 @@ public class PlayContinousMusic : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		print(Application.loadedLevel);
 		if (Application.loadedLevel == 1)
 			DestroyImmediate(this);
 		if (Application.loadedLevel == 3)
