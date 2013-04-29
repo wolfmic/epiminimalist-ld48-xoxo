@@ -17,8 +17,12 @@ public class scoreBox : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {		
-		if (curLife < 0 || Input.GetKeyDown(KeyCode.Escape)){
+		if (Input.GetKeyDown(KeyCode.Escape)){
 			Application.LoadLevel(0);
+		}
+		
+		if (curLife < 0){
+			Application.LoadLevel(3);
 		}
 	}
 	
